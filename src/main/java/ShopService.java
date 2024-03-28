@@ -7,7 +7,7 @@ public class ShopService {
     private ProductRepo productRepo = new ProductRepo();
     private OrderRepo orderRepo = new OrderMapRepo();
 
-    public Optional<Object> addOrder(List<String> productIds) {
+    public Optional<Order> addOrder(List<String> productIds) {
         List<Product> products = new ArrayList<>();
         for (String productId : productIds) {
             Optional<Product> productToOrder = productRepo.getProductById(productId);

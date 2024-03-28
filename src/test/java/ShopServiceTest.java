@@ -13,13 +13,14 @@ class ShopServiceTest {
         ShopService shopService = new ShopService();
         List<String> productsIds = List.of("1");
 
+
         //WHEN
-        Optional<Object> actualOptional = shopService.addOrder(productsIds);
+        Optional<Order> actualOptional = shopService.addOrder(productsIds);
 
         //THEN
         assertTrue(actualOptional.isPresent());
         Order expected = new Order("-1", List.of(new Product("1", "Apfel")), OrderStatus.IN_DELIVERY);
-        assertEquals(expected.products(), actualOptional.products());
+        assertEquals(expected.products(), actualOptional.get().products());
         assertNotNull(expected.id());
     }
 
@@ -30,11 +31,9 @@ class ShopServiceTest {
         List<String> productsIds = List.of("1", "2");
 
         //WHEN
-        Optional<Object> actual = shopService.addOrder(productsIds);
+        Optional<Order> actualOptional = shopService.addOrder(productsIds);
 
         //THEN
-        assertNull(actual);
-
-
+        assertTrue(actualOptional.isEmpty());
     }
 }
