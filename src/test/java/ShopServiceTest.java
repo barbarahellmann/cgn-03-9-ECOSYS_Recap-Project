@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,11 +14,12 @@ class ShopServiceTest {
         List<String> productsIds = List.of("1");
 
         //WHEN
-        Order actual = shopService.addOrder(productsIds);
+        Optional<Object> actualOptional = shopService.addOrder(productsIds);
 
         //THEN
+        assertTrue(actualOptional.isPresent());
         Order expected = new Order("-1", List.of(new Product("1", "Apfel")), OrderStatus.IN_DELIVERY);
-        assertEquals(expected.products(), actual.products());
+        assertEquals(expected.products(), actualOptional.products());
         assertNotNull(expected.id());
     }
 
@@ -28,7 +30,7 @@ class ShopServiceTest {
         List<String> productsIds = List.of("1", "2");
 
         //WHEN
-        Order actual = shopService.addOrder(productsIds);
+        Optional<Object> actual = shopService.addOrder(productsIds);
 
         //THEN
         assertNull(actual);
