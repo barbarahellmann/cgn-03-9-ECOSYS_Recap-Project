@@ -21,4 +21,14 @@ public class ShopService {
 
         return orderRepo.addOrder(newOrder);
     }
+    public List<Order>listOfProcessingOrders (List<Order> orderStatusList){
+
+        List<Order> orderStatus = new ArrayList<>();
+
+        orderStatus = orderStatusList.stream()
+                .filter(f -> orderStatusList.contains(OrderStatus.PROCESSING))
+                .toList();
+        return orderStatus;
+         }
+
 }
