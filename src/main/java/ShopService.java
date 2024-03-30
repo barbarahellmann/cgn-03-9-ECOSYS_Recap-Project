@@ -7,15 +7,20 @@ public class ShopService {
     private ProductRepo productRepo = new ProductRepo();
     private OrderRepo orderRepo = new OrderMapRepo();
 
-    public Optional<Order> addOrder(List<String> productIds) {
+
+ public Order addOrder(List<String> productIds) {
+
         List<Product> products = new ArrayList<>();
         for (String productId : productIds) {
-            Optional<Product> productToOrder = productRepo.getProductById(productId);
-            if (productToOrder.isEmpty()) {
+            try {
+            Product productToOrder = productRepo.getProductById(productId);
+                products.add(productToOrder);}
+               catch (Exception NoProductException){
+//            if (productToOrder == null) {
                 System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
-                return Optional.empty();
+                return null;
             }
-            products.add(productToOrder.get());
+//            products.add(productToOrder);
         }
 
         Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);

@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -25,7 +26,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void addOrderTest_whenInvalidProductId_expectNull() {
+    void addOrderTest_whenInvalidProductId_expectException() {
         //GIVEN
         ShopService shopService = new ShopService();
         List<String> productsIds = List.of("1", "2");
@@ -34,6 +35,14 @@ class ShopServiceTest {
         Optional<Order> actualOptional = shopService.addOrder(productsIds);
 
         //THEN
+
         assertTrue(actualOptional.isEmpty());
+        Order expected = null;
+                assertThrows(String.valueOf(NoProductException.class));
     }
+
+    private Order assertThrows(String s) {
+        return null;
+    }
+
 }
