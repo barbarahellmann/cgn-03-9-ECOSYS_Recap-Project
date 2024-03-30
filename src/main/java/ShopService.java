@@ -9,7 +9,7 @@ public class ShopService {
     private OrderRepo orderRepo = new OrderMapRepo();
 
 
- public Optional<Order> addOrder(List<String> productIds) throws NoProductException {
+ public Order addOrder(List<String> productIds) throws NoProductException {
 
         List<Product> products = new ArrayList<>();
         for (String productId : productIds) {
@@ -23,8 +23,9 @@ public class ShopService {
         }
         Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
 
-        return Optional.ofNullable(orderRepo.addOrder(newOrder));
-    }
+     return orderRepo.addOrder(newOrder);
+ }
+
     public List<Order>listOfProcessingOrders (List<Order> orderStatusList){
 
         List<Order> orderStatus = new ArrayList<>();
