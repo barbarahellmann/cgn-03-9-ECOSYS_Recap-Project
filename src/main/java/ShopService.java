@@ -18,7 +18,7 @@ public class ShopService {
                 productToOrder.ifPresent(products::add);
             } catch (Exception NoProductException) {
                 System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
-                return null;
+                throw NoProductException;
             }
         }
         Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);

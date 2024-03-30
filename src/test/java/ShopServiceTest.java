@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShopServiceTest {
 
     @Test
-    void addOrderTest() throws NoProductException {
+    void addOrderTest() throws NoProductException{
         //GIVEN
         ShopService shopService = new ShopService();
         List<String> productsIds = List.of("1");
@@ -28,20 +28,16 @@ class ShopServiceTest {
     @Test
     void addOrderTest_whenInvalidProductId_expectException() throws NoProductException {
         //GIVEN
-        //GIVEN
         ShopService shopService = new ShopService();
         List<String> productsIds = List.of("1", "2");
 
-        Order actual = null;
-
         //WHEN
-        try {
-            actual = shopService.addOrder(productsIds);
-        } catch (NoProductException e) {
-            //THEN
-            assertThrows(NoProductException.class, () -> shopService.addOrder(productsIds));
-        }
+        Optional<Order> actualOptional = Optional.ofNullable(shopService.addOrder(productsIds));
 
+        //THEN
+
+        assertThrows(NoProductException.class, () -> shopService.addOrder(productsIds));
     }
+
 
 }
